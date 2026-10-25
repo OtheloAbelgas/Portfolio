@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1120">
+  <title>Your Name | Developer Portfolio</title>
+  <style>
+    
+:root {
+  --bg: #f5f1e8;
+  --panel: #fffdf8;
+  --text: #203b2c;
+  --muted: #62675f;
+  --accent: #47745b;
+  --border: #deded2;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, "Segoe UI", sans-serif;
+  line-height: 1.8;
+}
+
+a { color: inherit; text-decoration: none; }
+.container { width: min(1120px, 90%); margin: auto; }
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(245, 241, 232, .94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+nav {
+  min-height: 78px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 1.15rem;
+  font-weight: 850;
+  letter-spacing: 1px;
+}
+
+.logo span, .accent { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.menu-btn {
+  display: none;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+section { padding: 90px 0; }
+
+.hero { padding: 95px 0 105px; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.eyebrow {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: .76rem;
+  font-weight: 800;
+}
+
+h1 {
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  letter-spacing: -3px;
+  line-height: 1.05;
+  margin: 22px 0;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+h3 { margin-bottom: 10px; }
+
+p { color: var(--muted); }
+.hero-copy { max-width: 560px; }
+.hero-copy p { font-size: 1.05rem; }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 5px;
+  border: 1px solid var(--accent);
+  font-weight: 700;
+  transition: .2s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-secondary { color: var(--accent); }
+.btn:hover { transform: translateY(-3px); }
+
+.portrait-wrap {
+  max-width: 370px;
+  width: 100%;
+  margin: auto;
+}
+
+.portrait-wrap::before { display: none; }
+
+.portrait {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: 16px 16px 0 #e3e5d9;
+}
+
+.surface {
+  background: #eeede3;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.section-head { margin-bottom: 38px; }
+.section-head p { max-width: 600px; margin-top: 12px; }
+
+.about-grid, .contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 28px;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px #203b2c0d;
+}
+
+.card-icon { font-size: 1.6rem; margin-bottom: 12px; }
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.tag {
+  background: #e9eee4;
+  color: #31583e;
+  border: 1px solid #d6e0d2;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: .8rem;
+}
+
+.skills-grid, .projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.skill { display: flex; align-items: flex-start; gap: 14px; }
+.skill h3 { margin-bottom: 4px; }
+.skill p, .project-body p { font-size: .9rem; }
+
+.skill-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  background: #e9eee4;
+  color: var(--accent);
+  border-radius: 4px;
+  font-weight: 800;
+}
+
+.project-card { overflow: hidden; padding: 0; }
+
+.project-art {
+  min-height: 165px;
+  display: grid;
+  place-items: center;
+  background: #e6e9dc;
+  color: var(--accent);
+  font-size: 2.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.project-card:nth-child(2) .project-art { background: #e9e1d3; }
+.project-card:nth-child(3) .project-art { background: #e5e6e0; }
+
+.project-body { padding: 24px; }
+
+.project-link {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 750;
+  margin-top: 16px;
+}
+
+.contact-card { display: flex; flex-direction: column; gap: 12px; }
+.contact-link { color: var(--accent); overflow-wrap: anywhere; }
+
+footer {
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+footer p { font-size: .85rem; }
+
+@media (max-width: 760px) {
+  .menu-btn { display: block; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 78px;
+    left: 0;
+    right: 0;
+    padding: 22px 5%;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-links.open { display: flex; }
+
+  .hero { padding: 60px 0 75px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 45px; }
+  .portrait-wrap { max-width: 280px; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .skills-grid, .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  section { padding: 65px 0; }
+  h1 { letter-spacing: -1.5px; }
+}
+
+@media (max-width: 480px) {
+  .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+
+    
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container" aria-label="Main navigation">
+      <a href="#home" class="logo">MY<span>PORTFOLIO</span></a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false"
+        aria-controls="navLinks" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Welcome to my portfolio</div>
+          <h1>Hi, I'm <span class="accent">Steve Boyd Othelo G. Abelgas</span></h1>
+          <h2 style="font-size:1.45rem;margin-bottom:18px">
+            Aspiring Developer & Creative Thinker
+          </h2>
+          <p>
+            I enjoy making ideas into reality through innovation and creativity.
+            Innovation starts with curiosity and a desire to learn.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#projects">Explore My Work ↗</a>
+            <a class="btn btn-secondary" href="#contact">Get In Touch</a>
+          </div>
+        </div>
+
+        <div class="portrait-wrap">
+          <img class="portrait" src="thelo.jfif"
+            alt="Portrait of Steve Boyd Othelo G. Abelgas">
+        </div>
+      </div>
+    </section>
+
+    <section class="surface" id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">A little about me</div>
+          <h2>More Than Just An <span class="accent">Idea.</span></h2>
+          <p>
+            My background, interests, and the things that motivate me
+            to keep learning and improving.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="card">
+            <div class="card-icon">✦</div>
+            <h3>Who I Am</h3>
+            <p>
+              I'm a interesting individual interested in unexplored ideas
+              and modern technology. I value creativity, collaboration,
+              and building practical solutions to real-world problems.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-icon">⌘</div>
+            <h3>What I Want to Build</h3>
+            <p>
+               I want to build a world where ideas and creativity can thrive,
+               where technology is used to solve problems and improve lives.
+               To build a world where people can connect their ideas into a better future.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Technology Innovator</span>
+              <span class="tag">Problem Solving</span>
+              <span class="tag">Continuous Learning</span>
+              <span class="tag">Web Development</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">My toolkit</div>
+          <h2>Skills & <span class="accent">Technologies</span></h2>
+          <p>
+            Technologies and working practices I am developing and using
+            in my projects.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="card skill">
+            <div class="skill-icon">H</div>
+            <div><h3>HTML</h3><p>Semantic page structure and accessibility.</p></div>
+          </article>
+          <article class="card skill">
+            <div class="skill-icon">C</div>
+            <div><h3>CSS</h3><p>Responsive layouts, styling, and animations.</p></div>
+          </article>
+          <article class="card skill">
+            <div class="skill-icon">JS</div>
+            <div><h3>JavaScript</h3><p>Interactive interfaces and web functionality.</p></div>
+          </article>
+          <article class="card skill">
+            <div class="skill-icon">G</div>
+            <div><h3>Git & GitHub</h3><p>Version control and project collaboration.</p></div>
+          </article>
+          <article class="card skill">
+            <div class="skill-icon">UI</div>
+            <div><h3>UI Design</h3><p>Clear layouts and user-focused experiences.</p></div>
+          </article>
+          <article class="card skill">
+            <div class="skill-icon">+</div>
+            <div><h3>Always Learning</h3><p>Exploring tools and modern development practices.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Selected work</div>
+          <h2>Projects I've <span class="accent">Explored.</span></h2>
+          <p>
+            A place to showcase your personal projects, school work,
+            experiments, and future creations.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="card project-card">
+            <div class="project-art">⌘</div>
+            <div class="project-body">
+              <h3>Inventory Management System</h3>
+              <p>
+                A complete web app for small businesses to manage products and stock.
+              </p>
+              <div class="tag-list">
+                <span class="tag">HTML</span><span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+              </div>
+              <a class="project-link" href="#contact">View Project Details ↗</a>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <div class="project-art">▦</div>
+            <div class="project-body">
+              <h3>Appointment Booking System</h3>
+              <p>
+              A booking platform for salons, clinics, or freelance service providers.
+              </p>
+              <div class="tag-list">
+                <span class="tag">JavaScript</span><span class="tag">PHP</span><span class="tag">MySQL</span>
+              </div>
+              <a class="project-link" href="#contact">View Project Details ↗</a>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <div class="project-art">✧</div>
+            <div class="project-body">
+              <h3>Project Management Web App</h3>
+              <p>
+                A tool for teams to organize work and track project progress.
+              </p>
+              <div class="tag-list">
+                <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span>
+              </div>
+              <a class="project-link" href="#contact">View Project Details ↗</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Let's connect</div>
+          <h2>Have an Idea in <span class="accent">Mind?</span></h2>
+          <p>
+            Interested in working together, discussing an idea,
+            or simply connecting? I'd love to hear from you.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="card">
+            <h3>Let's Talk</h3>
+            <p>
+              I'm open to opportunities, collaborations, and conversations
+              about technology and development.
+            </p>
+            <div class="actions">
+              <a class="btn btn-primary" href="mailto:thelo.abelgas@gmail.com">
+                Send Me an Email ↗
+              </a>
+            </div>
+          </article>
+          <article class="card contact-card">
+            <h3>Find Me Online</h3>
+            <p>Email: <a class="contact-link" href="mailto:thelo.abelgas@gmail.com">thelo.abelgas@gmail.com</a></p>
+            <p>GitHub: <a class="contact-link" href="https://github.com/OtheloAbelgas">https://github.com/OtheloAbelgas</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Portfolio. All rights reserved.</p>
+      <p>Designed with care and <span class="accent">curiosity.</span></p>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+      menuBtn.textContent = isOpen ? "✕" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
